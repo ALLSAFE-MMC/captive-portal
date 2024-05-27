@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Captive Portal</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="{{ url_for('login') }}" method="post">
+        <label for="tc_kimlik_no">T.C. Kimlik No:</label>
+        <input type="text" id="tc_kimlik_no" name="tc_kimlik_no" required><br>
+        <label for="ad">Ad:</label>
+        <input type="text" id="ad" name="ad" required><br>
+        <label for="soyad">Soyad:</label>
+        <input type="text" id="soyad" name="soyad" required><br>
+        <label for="dogum_yili">Doğum Yılı:</label>
+        <input type="text" id="dogum_yili" name="dogum_yili" required><br>
+        <button type="submit">Login</button>
+    </form>
+    {% if error %}
+    <p style="color:red">{{ error }}</p>
+    {% endif %}
+</body>
+</html>

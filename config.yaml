@@ -1,0 +1,11 @@
+admin:
+  username: "cpadmin"
+  password: "123456"
+database:
+  uri: "sqlite:////usr/local/captive-portal/database.db"
+captive_portal:
+  ip: "192.168.1.2"
+  port: 80
+nginx:
+  listen_port: 80
+  server_name: "192.168.1.2"

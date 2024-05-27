@@ -1,0 +1,8 @@
+flask
+requests
+pyOpenSSL
+zeep
+cryptography
+sqlalchemy
+flask-login
+pyyaml
