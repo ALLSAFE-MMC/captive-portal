@@ -26,13 +26,20 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.before_first_request
+# Veritabanı oluşturma bayrağı
+db_initialized = False
+
+@app.before_request
 def create_admin():
-    admin_user = User.query.filter_by(username=config['admin']['username']).first()
-    if not admin_user:
-        admin = User(username=config['admin']['username'], password=config['admin']['password'])
-        db.session.add(admin)
-        db.session.commit()
+    global db_initialized
+    if not db_initialized:
+        db.create_all()
+        admin_user = User.query.filter_by(username=config['admin']['username']).first()
+        if not admin_user:
+            admin = User(username=config['admin']['username'], password=config['admin']['password'])
+            db.session.add(admin)
+            db.session.commit()
+        db_initialized = True
 
 @app.route('/')
 def index():
@@ -93,5 +100,4 @@ def admin_logout():
     return redirect(url_for('admin_login'))
 
 if __name__ == '__main__':
-    db.create_all()
     app.run(host='0.0.0.0', port=config['captive_portal']['port'])
